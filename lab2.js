@@ -260,7 +260,7 @@ function arrayCompare (firstArray, secondArray) {
 } // end arrayCompare
 
 assert(arrayCompare(sumSort(multiArray), [ [ 4, 1 ], [ 1, 2, 3 ] ]) === true, "The arrays are not sorted");
-assert(sumSort(emptyArray) === [ [], [] ], "The array should be the same");
+assert(arrayCompare(sumSort(emptyArray), [ [], [] ]) === true, "The array should be the same");
 
 //*********************************************************
 // PROBLEM 4: Cleanup: 10 points
