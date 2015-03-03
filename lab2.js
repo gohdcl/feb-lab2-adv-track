@@ -76,11 +76,8 @@ function hoursToOoze(population, peoplePerHour) {
 
   while (peopleEaten < population) {
     hour += 1;
-    console.log("hour: " + hour);
     peopleEaten += peoplePerHour;
-    console.log("People eaten: " + peopleEaten);
     peoplePerHour = peopleEaten + 1;
-    console.log("People/hour: " + peoplePerHour);
   } // end while
   return hour;
 } // end hoursToOoze
@@ -92,9 +89,10 @@ assert(blob.hoursToOoze(1000, 1) === hoursSpentInDowington,
   "hoursSpentInDowington should match hoursToOoze\"s result for 1000");
 // TODO: write three more assertions like the two above, testing out
 // the hoursToOoze method.
-assert(blob.hoursToOoze(5000, 1) === 15, "The blob didn't take 15 hours.");
+assert(blob.hoursToOoze(5000, 1) === 13, "The blob didn't take 13 hours to eat 5000 people.");
 assert(blob.hoursToOoze(1, 1) === 1, "The blob should only take 1 hour to eat 1 person.");
-assert(blob.hoursToOoze(1, 0) === 0, "The blob will eventually eat someone!");
+assert(blob.hoursToOoze(1, 0) === 2, "The blob will eventually eat someone!");
+
 //*********************************************************
 // PROBLEM 2: Universal Translator. 20 points
 //*********************************************************
@@ -199,14 +197,32 @@ assert((new Romulan()).sayHello(new Human()) === hello["federation standard"],
 // assertions for each one
 //*********************************************************
 function lastLetterSort(stringArray) {
-  function byLastLetter(array) {
+  function byLastLetter(item1, item2) {
     //TODO: implement me. sort the strings in alphabetical
     // order using their last letter
     // read this: http://www.w3schools.com/jsref/jsref_sort.asp
+    var char1 = item1.substr(item1.length - 1);
+    var char2 = item2.substr(item2.length - 1);
 
-  }
+    if (char1 < char2) {
+      return -1;
+    } /* end if */ else if (char1 > char2) {
+      return 1;
+    } /* end else if */ else {
+      return 0;
+    } // end else
+  } // end byLastLetter
   stringArray.sort(byLastLetter);
-}
+  return stringArray;
+} // end lastLetterSort
+
+var arrayOfStrings = [ "kitten", "cat" ];
+var sorted = [ "kitten", "cat" ];
+var arrayOfStrings2 = [ "emperor", "gentoo", "chinstrap" ];
+var sorted2 = [ "gentoo", "chinstrap", "emperor" ];
+
+assert(arrayCompare(lastLetterSort(arrayOfStrings), sorted) === true, "The array is not sorted");
+assert(arrayCompare(lastLetterSort(arrayOfStrings2), sorted2) === true, "The array is not sorted");
 
 function sumArray(numberArray) {
   var sum = 0;
@@ -218,15 +234,16 @@ function sumArray(numberArray) {
 var anArray = [ 1, 2, 3 ];
 var secondArray = [];
 var thirdArray = [ 4, 1 ];
+var fourthArray = [ 5, 5, 5 ]
 
 assert(sumArray(anArray) === 6, "The sum of array element values should be 6");
 assert(sumArray(secondArray) === 0, "The sum of an empty array is 0");
 
-var multiArray = [ anArray, thirdArray ];
+var multiArray = [ anArray, fourthArray, thirdArray ];
 var emptyArray = [ [], [] ];
 
 function sumSort(arrayOfArrays) {
-  arrayOfArrays.sort(function(item, item2) {
+  arrayOfArrays.sort(function(item, item2) { // added parameter item2 for sort comparison purposes
     // TODO: implement me using sumArray
     //  order the arrays based on the sum of the numbers
     //  inside each array
@@ -259,7 +276,7 @@ function arrayCompare (firstArray, secondArray) {
   return true; // if no differences are found, return true
 } // end arrayCompare
 
-assert(arrayCompare(sumSort(multiArray), [ [ 4, 1 ], [ 1, 2, 3 ] ]) === true, "The arrays are not sorted");
+assert(arrayCompare(sumSort(multiArray), [ [ 4, 1 ], [ 1, 2, 3 ], [ 5, 5, 5 ] ]) === true, "The arrays are not sorted");
 assert(arrayCompare(sumSort(emptyArray), [ [], [] ]) === true, "The array should be the same");
 
 //*********************************************************
