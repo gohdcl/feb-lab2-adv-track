@@ -234,7 +234,7 @@ function sumArray(numberArray) {
 var anArray = [ 1, 2, 3 ];
 var secondArray = [];
 var thirdArray = [ 4, 1 ];
-var fourthArray = [ 5, 5, 5 ]
+var fourthArray = [ 5, 5, 5 ];
 
 assert(sumArray(anArray) === 6, "The sum of array element values should be 6");
 assert(sumArray(secondArray) === 0, "The sum of an empty array is 0");
